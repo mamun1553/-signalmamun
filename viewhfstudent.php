@@ -1,0 +1,136 @@
+s<?php 
+require 'includes/snippet.php';
+	require 'includes/db-inc.php';
+include "includes/header.php"; 
+
+?>
+
+
+<div class="container">
+    <?php include "includes/nav2.php"; ?>
+	<!-- navbar ends -->
+	<!-- info alert -->
+	<div class="alert alert-warning col-lg-7 col-md-12 col-sm-12 col-xs-12 col-lg-offset-2 col-md-offset-0 col-sm-offset-1 col-xs-offset-0" style="margin-top:70px">
+
+		<span class="glyphicon glyphicon-book"></span>
+	    <strong><b>HF SIGNAL EQUIPMENT</b></strong> Table
+	</div>
+	<!-- <div class="alert alert-info col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top: 10px">
+		<button class="btn btn-success" style="float: left"><span class="glyphicon glyphicon-plus-sign"></span> Add Button</button>
+		
+	    <form class="form-vertical col-lg-6 col-md-6 col-sm-6 col-xs-12" role="form" style="float: right">
+	    	<div class="form-group ">
+				<label for="Username" class="col-lg-8 col-md-2 col-xs-8 col-sm-8 control-label">Search User</label>
+				<div class="col-lg-12 col-md-12 col-sm-10 col-xs-12  ">
+							<input type="text" class="form-control" name="username" placeholder="Enter Username" id="username">
+				</div>		
+			</div>
+	    </form>
+    </div> -->
+	   
+	   
+
+
+	</div>
+	<div class="container col-lg-11 ">
+		<div class="panel panel-default">
+		  <!-- Default panel contents -->
+		  <table class="table table-bordered">
+		          <thead>
+		               <tr>
+		               	  <th>S/N</th> 
+		                  <th>RADIO SET NAME</th>
+		                  <th>RADIO SET TYPE</th>
+		                  <th>RADIO SET VERSION</th>
+		                  <th>IMAGE</th>
+		                  <th>Action</th>
+		                </tr>    
+		          </thead>    
+		          <?php 
+
+		          $sql = "SELECT * FROM hf";
+		          $query = mysqli_query($conn, $sql);
+		          $counter = 1;
+		          while ( $row = mysqli_fetch_assoc($query)) {        	
+		           ?>
+		          <tbody> 
+		            <tr> 
+		             <td><?php echo $counter++; ?></td>
+		             <td><?php echo $row['hf_name']; ?></td>
+		             <td><?php echo $row['hf_type']; ?></td>
+		             <td><?php echo $row['hf_version']; ?></td>
+		             <td><img src="<?php echo  $row['hf_photo'] ?>" width="90" height="90" alt=""></td>
+		             
+		             <td>
+		             	<form action="viewhf.php" method="post">
+		             	<input type="hidden" value="<?php echo $row['hf_id']; ?>" name="del_btn">
+		                </form> 
+		                <li><a href="viewbarret2090student.php">ENTER</a></li>
+		             </td>
+		            </tr> 
+		           
+		         </tbody> 
+		         <?php } ?>
+		   </table>
+		 
+	  </div>
+	</div>
+	<div class="mod modal fade" id="popUpWindow">
+        	<div class="modal-dialog">
+        		<div class="modal-content">
+        			
+        			<!-- header begins here -->
+        			<div class="modal-header">
+        				<button type="button" class="close" data-dismiss="modal">&times;</button>
+        				<h3 class="modal-title"> Warning</h3>
+        			</div>
+
+        			<!-- body begins here -->
+        			<div class="modal-body">
+        				<p>Are you sure you want to delete this Member?</p>
+        			</div>
+
+        			<!-- button -->
+        			<div class="modal-footer ">
+        				<button class="col-lg-4 col-sm-4 col-xs-6 col-md-4 btn btn-warning pull-right"  style="margin-left: 10px" class="close" data-dismiss="modal">
+        					No
+        				</button>&nbsp;
+        				<button class="col-lg-4 col-sm-4 col-xs-6 col-md-4 btn btn-success pull-right"  class="close" data-dismiss="modal" data-toggle="modal" data-target="#info">
+        					Yes
+        				</button>
+        			</div>
+        		</div>
+        	</div>
+        </div>
+        <div class="modal fade" id="info">
+        	<div class="modal-dialog">
+        		<div class="modal-content">
+        			
+        			<!-- header begins here -->
+        			<div class="modal-header">
+        				<button type="button" class="close" data-dismiss="modal">&times;</button>
+        				<h3 class="modal-title"> Warning</h3>
+        			</div>
+
+        			<!-- body begins here -->
+        			<div class="modal-body">
+        				<p>Member deleted <span class="glyphicon glyphicon-ok"></span></p>
+        			</div>
+
+        		</div>
+        	</div>
+        </div>
+		
+
+
+
+
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/bootstrap.js"></script>	
+<script type="text/javascript">
+function hey(){
+	alert("Hello");
+}
+</script>
+</body>
+</html>
